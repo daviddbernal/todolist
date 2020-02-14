@@ -25,8 +25,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <List list={this.state.items} />
         <Header search={this.Order} />
+        <List list={this.state.items} />
       </div>
     );
   }

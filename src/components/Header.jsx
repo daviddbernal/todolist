@@ -20,14 +20,14 @@ class Header extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="ContentHeader">
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            value={this.state.value}
             onChange={this.handleChange}
+            value={this.state.value}
           />
-          <input type="Submit" value="toSend" />
+          <input type="submit" onClick={this.handleSubmit} value="toSend" />
         </form>
       </div>
     );
