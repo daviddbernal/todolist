@@ -7,28 +7,35 @@ class Header extends React.Component {
       value: ""
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addTask = this.addTask.bind(this);
   }
   handleChange = event => {
     this.setState({
       value: event.target.value
     });
   };
-  handleSubmit = event => {
-    event.preventDefault();
-    this.props.search(this.state.value);
+  addTask = () => {
+    this.props.AddTask(this.state.value);
+    this.setState({
+      value: ""
+    });
   };
   render() {
     return (
-      <div className="ContentHeader">
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            onChange={this.handleChange}
-            value={this.state.value}
-          />
-          <input type="submit" onClick={this.handleSubmit} value="toSend" />
-        </form>
+      <div className="contentHeader">
+        <input
+          onChange={this.handleChange}
+          className="Itext"
+          type="text"
+          value={this.state.value}
+          placeholder="write your task"
+        />
+        <input
+          className="Ibutton"
+          type="button"
+          value="add Task"
+          onClick={this.addTask}
+        />
       </div>
     );
   }

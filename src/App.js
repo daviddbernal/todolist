@@ -1,32 +1,26 @@
 import React from "react";
 import "./App.css";
-import List from "./components/List";
 import Header from "./components/Header";
+import ListView from "./components/Tasks";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nums: "0",
-      items: []
+      task: ""
     };
-    this.Order = this.Order.bind(this);
+    this.task = this.task.bind(this);
   }
-  Order = async value => {
-    const response = await fetch(
-      "https://itunes.apple.com/search?term=" + value + "&entity=album"
-    )
-      .then(res => res.json())
-      .catch();
+  task = value => {
     this.setState({
-      items: response.results
+      task: value
     });
   };
   render() {
     return (
       <div>
-        <Header search={this.Order} />
-        <List list={this.state.items} />
+        <Header AddTask={this.task} />
+        <ListView task={this.state.task} />
       </div>
     );
   }
