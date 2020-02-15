@@ -28,8 +28,17 @@ class ListView extends React.Component {
     if (this.state.Arrtask.length !== 0) {
       Card = this.state.Arrtask.map((item, index) => (
         <div key={index} className="card">
-          <button onClick={this.onDelete.bind(this, index)}>x</button>
-          <div>{item}</div>
+          <button className="edit">edit</button>
+          <hr className="Div" />
+          <span
+            className="buttonDelete"
+            onClick={this.onDelete.bind(this, index)}
+          >
+            X
+          </span>
+          <div className="text">
+            <p>{item}</p>
+          </div>
         </div>
       ));
     }
