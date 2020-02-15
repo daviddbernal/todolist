@@ -9,9 +9,9 @@ class App extends React.Component {
     this.state = {
       task: ""
     };
-    this.task = this.task.bind(this);
+    this.onTask = this.onTask.bind(this);
   }
-  task = value => {
+  onTask = value => {
     this.setState({
       task: value
     });
@@ -19,8 +19,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header AddTask={this.task} />
-        <ListView task={this.state.task} />
+        <Header AddTask={this.onTask} />
+        <ListView addTask={this.state.task} />
       </div>
     );
   }
