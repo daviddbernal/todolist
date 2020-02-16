@@ -45,11 +45,10 @@ class ListView extends React.Component {
     }
     if (del !== null) {
       let newList = this.state.Arrtask.splice(this.state.index, 1);
-      newList = <del>{newList[0]}</del>;
-      this.state.Arrtask.splice(this.state.index, 1, newList);
+      this.state.Arrtask.splice(this.state.index, 0, <del>{newList}</del>);
       del = null;
     }
-    if (this.state.Arrtask.length !== 0 && del === null) {
+    if (this.state.Arrtask.length !== 0) {
       Card = this.state.Arrtask.map((item, index) => (
         <div key={index} className="card">
           <input
