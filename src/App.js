@@ -12,7 +12,9 @@ class App extends React.Component {
     // this.onTask = this.onTask.bind(this);
   }
   addTask = value => {
-    this.state.tasks.push(value);
+    if (value !== "") {
+      this.state.tasks.push(value);
+    }
     this.setState({
       tasks: this.state.tasks
     });
@@ -35,7 +37,6 @@ class App extends React.Component {
     this.setState({
       tasks: this.state.tasks
     });
-    console.log(this.state.tasks);
   };
   render() {
     return (
