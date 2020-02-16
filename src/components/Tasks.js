@@ -21,7 +21,7 @@ class ListView extends React.Component {
   };
   onRead = index => {
     this.setState({
-      del: index
+      index: index
     });
     del = true;
   };
@@ -31,23 +31,22 @@ class ListView extends React.Component {
     if (
       this.props.addTask !== "" &&
       !active &&
-      this.props.addTask !== "delete"
+      this.props.addTask !== "delete" &&
+      del === null
     ) {
       this.state.Arrtask.push(this.props.addTask);
     }
-    if (active && this.props.addTask !== "delete") {
+    if (active && this.props.addTask !== "delete" && del === null) {
       this.state.Arrtask.splice(this.state.index, 1);
       active = false;
     }
-    if (this.props.addTask === "delete") {
+    if (this.props.addTask === "delete" && del === null) {
       this.state.Arrtask.splice(0);
     }
     if (del !== null) {
-      this.state.Arrtask.splice(
-        this.state.del,
-        1,
-        <del>{this.state.Arrtask.splice(this.state.del, 1)}</del>
-      );
+      let newList = this.state.Arrtask.splice(this.state.index, 1);
+      newList = <del>{newList[0]}</del>;
+      this.state.Arrtask.splice(this.state.index, 1, newList);
       del = null;
     }
     if (this.state.Arrtask.length !== 0 && del === null) {
