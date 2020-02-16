@@ -16,10 +16,16 @@ class App extends React.Component {
       task: value
     });
   };
+  ondeleteAll = Alldelete => {
+    this.setState({
+      task: Alldelete
+    });
+    console.log(Alldelete);
+  };
   render() {
     return (
       <div>
-        <Header AddTask={this.onTask} />
+        <Header AddTask={this.onTask} deleteAll={this.ondeleteAll} />
         <ListView addTask={this.state.task} />
       </div>
     );

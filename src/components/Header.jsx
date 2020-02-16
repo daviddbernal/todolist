@@ -20,6 +20,9 @@ class Header extends React.Component {
       value: ""
     });
   };
+  onDelete = () => {
+    this.props.deleteAll("delete");
+  };
   render() {
     return (
       <div className="contentHeader">
@@ -29,6 +32,12 @@ class Header extends React.Component {
           type="text"
           value={this.state.value}
           placeholder="write your task"
+        />
+        <input
+          type="button"
+          className="deleteAll"
+          value="delete All"
+          onClick={this.onDelete}
         />
         <input
           className="Ibutton"
