@@ -1,32 +1,51 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/Header";
-import ListView from "./components/Tasks";
+import Tasks from "./components/Tasks";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      task: ""
+      tasks: []
     };
-    this.onTask = this.onTask.bind(this);
+    // this.onTask = this.onTask.bind(this);
   }
-  onTask = value => {
+  addTask = value => {
+    this.state.tasks.push(value);
     this.setState({
-      task: value
+      tasks: this.state.tasks
     });
   };
-  ondeleteAll = Alldelete => {
+  ondeleteAll = () => {
+    this.state.tasks.splice(0);
     this.setState({
-      task: Alldelete
+      tasks: this.state.tasks
     });
-    console.log(Alldelete);
+  };
+  deleteTask = index => {
+    this.state.tasks.splice(index, 1);
+    this.setState({
+      tasks: this.state.tasks
+    });
+  };
+  strikethrough = index => {
+    let newList = this.state.tasks.splice(index, 1);
+    this.state.tasks.splice(index, 0, <del>{newList[0]}</del>);
+    this.setState({
+      tasks: this.state.tasks
+    });
+    console.log(this.state.tasks);
   };
   render() {
     return (
       <div>
-        <Header AddTask={this.onTask} deleteAll={this.ondeleteAll} />
-        <ListView addTask={this.state.task} />
+        <Header addTask={this.addTask} deleteAll={this.ondeleteAll} />
+        <Tasks
+          tasks={this.state.tasks}
+          deleteTask={this.deleteTask}
+          strikethrough={this.strikethrough}
+        />
       </div>
     );
   }

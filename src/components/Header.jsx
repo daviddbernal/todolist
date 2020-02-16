@@ -15,13 +15,13 @@ class Header extends React.Component {
     });
   };
   addTask = () => {
-    this.props.AddTask(this.state.value);
+    this.props.addTask(this.state.value);
     this.setState({
       value: ""
     });
   };
   onDelete = () => {
-    this.props.deleteAll("delete");
+    this.props.deleteAll();
   };
   render() {
     return (

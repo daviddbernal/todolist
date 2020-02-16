@@ -1,77 +1,31 @@
 import React from "react";
 
-var active = false;
-var del = null;
-
-class ListView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      Arrtask: [],
-      index: 0,
-      checked: "",
-      del: null
-    };
-  }
-  onDelete = index => {
-    this.setState({
-      index: index
-    });
-    active = true;
+const Tasks = props => {
+  const onDelete = index => {
+    props.deleteTask(index);
   };
-  onRead = index => {
-    this.setState({
-      index: index
-    });
-    del = true;
+  const onRead = index => {
+    props.strikethrough(index);
   };
-  //event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-  render() {
-    let Card;
-    if (
-      this.props.addTask !== "" &&
-      !active &&
-      this.props.addTask !== "delete" &&
-      del === null
-    ) {
-      this.state.Arrtask.push(this.props.addTask);
-    }
-    if (active && this.props.addTask !== "delete" && del === null) {
-      this.state.Arrtask.splice(this.state.index, 1);
-      active = false;
-    }
-    if (this.props.addTask === "delete" && del === null) {
-      this.state.Arrtask.splice(0);
-    }
-    if (del !== null) {
-      let newList = this.state.Arrtask.splice(this.state.index, 1);
-      this.state.Arrtask.splice(this.state.index, 0, <del>{newList}</del>);
-      del = null;
-    }
-    if (this.state.Arrtask.length !== 0) {
-      Card = this.state.Arrtask.map((item, index) => (
-        <div key={index} className="card">
-          <input
-            className="edit"
-            value="complete"
-            type="button"
-            onClick={this.onRead.bind(this, index)}
-          />
-          <hr className="Div" />
-          <span
-            className="buttonDelete"
-            onClick={this.onDelete.bind(this, index)}
-          >
-            X
-          </span>
-          <div className="text">
-            <p>{item}</p>
-          </div>
-        </div>
-      ));
-    }
-    return <div className="ContentTask">{Card}</div>;
-  }
-}
+  const cards = props.tasks.map((item, index) => (
+    <div key={index} className="card">
+      <input
+        className="edit"
+        value="complete"
+        type="button"
+        onClick={() => onRead(index)}
+      />
+      <hr className="Div" />
+      <span className="buttonDelete" onClick={() => onDelete(index)}>
+        X
+      </span>
+      <div className="text">
+        <p>{item}</p>
+      </div>
+    </div>
+  ));
 
-export default ListView;
+  return <div className="ContentTask">{cards}</div>;
+};
+
+export default Tasks;
